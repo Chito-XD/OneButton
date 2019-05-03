@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  
 
-public class Counter : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     float currentTime = 0f;
-    public float startingTime = 10f;
+    public float startingTime = 20f;
+    public GameObject winPanel;
 
     [SerializeField] Text conter;
 
@@ -14,6 +16,7 @@ public class Counter : MonoBehaviour
     void Start()
     {
         currentTime = startingTime;
+        winPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,7 +27,13 @@ public class Counter : MonoBehaviour
 
         if(currentTime <= 0)
         {
-            currentTime = 0;
+            currentTime = 0;            
+            winPanel.SetActive(true);
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
